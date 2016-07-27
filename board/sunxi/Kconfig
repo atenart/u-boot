@@ -83,6 +83,7 @@ config MACH_SUN5I
 
 config MACH_SUN6I
 	bool "sun6i (Allwinner A31)"
+	select ARM_GIC
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
 	select CPU_V7_HAS_VIRT
@@ -93,6 +94,7 @@ config MACH_SUN6I
 
 config MACH_SUN7I
 	bool "sun7i (Allwinner A20)"
+	select ARM_GIC
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
 	select CPU_V7_HAS_VIRT
@@ -103,6 +105,7 @@ config MACH_SUN7I
 
 config MACH_SUN8I_A23
 	bool "sun8i (Allwinner A23)"
+	select ARM_GIC
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
 	select CPU_V7_HAS_VIRT
@@ -113,6 +116,7 @@ config MACH_SUN8I_A23
 
 config MACH_SUN8I_A33
 	bool "sun8i (Allwinner A33)"
+	select ARM_GIC
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
 	select CPU_V7_HAS_VIRT
@@ -123,12 +127,14 @@ config MACH_SUN8I_A33
 
 config MACH_SUN8I_A83T
 	bool "sun8i (Allwinner A83T)"
+	select ARM_GIC
 	select CPU_V7
 	select SUNXI_GEN_SUN6I
 	select SUPPORT_SPL
 
 config MACH_SUN8I_H3
 	bool "sun8i (Allwinner H3)"
+	select ARM_GIC
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
 	select CPU_V7_HAS_VIRT
@@ -138,6 +144,7 @@ config MACH_SUN8I_H3
 
 config MACH_SUN8I_R40
 	bool "sun8i (Allwinner R40)"
+	select ARM_GIC
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
 	select CPU_V7_HAS_VIRT
@@ -147,6 +154,7 @@ config MACH_SUN8I_R40
 
 config MACH_SUN8I_V3S
 	bool "sun8i (Allwinner V3s)"
+	select ARM_GIC
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
 	select CPU_V7_HAS_VIRT
@@ -156,6 +164,7 @@ config MACH_SUN8I_V3S
 
 config MACH_SUN9I
 	bool "sun9i (Allwinner A80)"
+	select ARM_GIC
 	select CPU_V7
 	select SUNXI_HIGH_SRAM
 	select SUNXI_GEN_SUN6I
