@@ -13,6 +13,9 @@ config DMA_ADDR_T_64BIT
 	bool
 	default y if ARM64
 
+config ARM_GIC
+	bool
+
 config HAS_VBAR
 	bool
 
