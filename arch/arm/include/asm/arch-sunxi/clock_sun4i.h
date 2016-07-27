@@ -208,6 +208,8 @@ struct sunxi_ccm_reg {
 #define CCM_AHB_GATE_DLL (0x1 << 15)
 #define CCM_AHB_GATE_ACE (0x1 << 16)
 
+#define CCM_PLL1_CTRL_EN		(0x1 << 31)
+
 #define CCM_PLL3_CTRL_M_SHIFT		0
 #define CCM_PLL3_CTRL_M_MASK		(0x7f << CCM_PLL3_CTRL_M_SHIFT)
 #define CCM_PLL3_CTRL_M(n)		(((n) & 0x7f) << 0)

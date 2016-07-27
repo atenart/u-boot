@@ -22,6 +22,8 @@
 
 #include <linux/bitops.h>
 
+#include "psci.h"
+
 #define __irq		__attribute__ ((interrupt ("IRQ")))
 
 #define	GICD_BASE	(SUNXI_GIC400_BASE + GIC_DIST_OFFSET)
@@ -37,44 +39,6 @@
 #define SUN8I_R40_PWROFF			(0x110)
 #define SUN8I_R40_PWR_CLAMP(cpu)		(0x120 + (cpu) * 0x4)
 #define SUN8I_R40_SRAMC_SOFT_ENTRY_REG0		(0xbc)
-
-static void __secure cp15_write_cntp_tval(u32 tval)
-{
-	asm volatile ("mcr p15, 0, %0, c14, c2, 0" : : "r" (tval));
-}
-
-static void __secure cp15_write_cntp_ctl(u32 val)
-{
-	asm volatile ("mcr p15, 0, %0, c14, c2, 1" : : "r" (val));
-}
-
-static u32 __secure cp15_read_cntp_ctl(void)
-{
-	u32 val;
-
-	asm volatile ("mrc p15, 0, %0, c14, c2, 1" : "=r" (val));
-
-	return val;
-}
-
-#define ONE_MS (COUNTER_FREQUENCY / 1000)
-
-static void __secure __mdelay(u32 ms)
-{
-	u32 reg = ONE_MS * ms;
-
-	cp15_write_cntp_tval(reg);
-	isb();
-	cp15_write_cntp_ctl(3);
-
-	do {
-		isb();
-		reg = cp15_read_cntp_ctl();
-	} while (!(reg & BIT(2)));
-
-	cp15_write_cntp_ctl(0);
-	isb();
-}
 
 static void __secure clamp_release(u32 __maybe_unused *clamp)
 {
