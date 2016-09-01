@@ -472,6 +472,7 @@ config ARCH_BCM283X
 
 config TARGET_VEXPRESS_CA15_TC2
 	bool "Support vexpress_ca15_tc2"
+	select ARM_GIC
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
 	select CPU_V7_HAS_VIRT
@@ -556,14 +557,17 @@ config TARGET_BCM23550_W1D
 
 config TARGET_BCM28155_AP
 	bool "Support bcm28155_ap"
+	select ARM_GIC
 	select CPU_V7
 
 config TARGET_BCMCYGNUS
 	bool "Support bcmcygnus"
+	select ARM_GIC
 	select CPU_V7
 
 config TARGET_BCMNSP
 	bool "Support bcmnsp"
+	select ARM_GIC
 	select CPU_V7
 
 config TARGET_BCMNS2
@@ -622,6 +626,7 @@ config ARCH_MX7ULP
 
 config ARCH_MX7
 	bool "Freescale MX7"
+	select ARM_GIC
 	select CPU_V7
 	select SYS_FSL_HAS_SEC if SECURE_BOOT
 	select SYS_FSL_SEC_COMPAT_4
@@ -998,6 +1003,7 @@ config TARGET_LS1012AFRDM
 
 config TARGET_LS1021AQDS
 	bool "Support ls1021aqds"
+	select ARM_GIC
 	select BOARD_LATE_INIT
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
@@ -1011,6 +1017,7 @@ config TARGET_LS1021AQDS
 
 config TARGET_LS1021ATWR
 	bool "Support ls1021atwr"
+	select ARM_GIC
 	select BOARD_LATE_INIT
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
@@ -1023,6 +1030,7 @@ config TARGET_LS1021ATWR
 
 config TARGET_LS1021AIOT
 	bool "Support ls1021aiot"
+	select ARM_GIC
 	select BOARD_LATE_INIT
 	select CPU_V7
 	select CPU_V7_HAS_NONSEC
@@ -1103,7 +1111,9 @@ config TARGET_COLIBRI_PXA270
 
 config ARCH_UNIPHIER
 	bool "Socionext UniPhier SoCs"
+	select ARM_GIC
 	select BOARD_LATE_INIT
+	select BLK
 	select CLK_UNIPHIER
 	select DM
 	select DM_GPIO
