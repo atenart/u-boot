@@ -22,6 +22,7 @@ config TEGRA_IVC
 
 config TEGRA_COMMON
 	bool "Tegra common options"
+	select ARM_GIC
 	select CLK
 	select DM
 	select DM_ETH
