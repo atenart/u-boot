@@ -73,6 +73,42 @@ static inline void atomic_dec(volatile atomic_t *v)
 	local_irq_restore(flags);
 }
 
+#define ATOMIC_OP_RETURN(op, c_op, asm_op)				\
+static inline int atomic_##op##_return(int i, volatile atomic_t *v)	\
+{									\
+        unsigned long tmp;						\
+        int result;							\
+									\
+	/* prefetch */							\
+	__asm__ __volatile__("pld\t%a0"					\
+	:: "p" (&v->counter));						\
+									\
+        __asm__ __volatile__("@ atomic_" #op "_return\n"		\
+"1:	ldrex	%0, [%3]\n"						\
+"	" #asm_op "	%0, %0, %4\n"					\
+"	strex	%1, %0, [%3]\n"						\
+"	teq	%1, #0\n"						\
+"	bne	1b"							\
+        : "=&r" (result), "=&r" (tmp), "+Qo" (v->counter)		\
+        : "r" (&v->counter), "Ir" (i)					\
+        : "cc");							\
+									\
+        return result;							\
+}
+
+ATOMIC_OP_RETURN(add, +=, add)
+ATOMIC_OP_RETURN(sub, -=, sub)
+
+static inline int atomic_inc_return(volatile atomic_t *v)
+{
+	return atomic_add_return(1, v);
+}
+
+static inline int atomic_dec_return(volatile atomic_t *v)
+{
+	return atomic_sub_return(1, v);
+}
+
 static inline int atomic_dec_and_test(volatile atomic_t *v)
 {
 	unsigned long flags = 0;
